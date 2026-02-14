@@ -3,308 +3,351 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Karen 🤍</title>
+<title>Para Karen Andreina 🤍</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-background:radial-gradient(circle at center,#1b1b1b 0%,#000 85%);
-font-family:'Cormorant Garamond', serif;
-color:white;
+background:radial-gradient(circle at top,#2a0f1f,#12040c 70%);
 min-height:100vh;
 display:flex;
-flex-direction:column;
 align-items:center;
 justify-content:center;
 overflow:hidden;
-padding:20px;
+color:white;
+font-family:'Playfair Display',serif;
 }
 
-/* INTRO */
-.intro{
-max-width:650px;
-text-align:center;
-line-height:1.6;
-font-size:18px;
-margin-bottom:35px;
-transition:opacity 1s ease;
-}
-
-/* WRAPPER */
+/* ===== CONTENEDOR ===== */
 .wrapper{
-display:flex;
-flex-direction:column;
-align-items:center;
 width:100%;
-max-width:750px;
-}
-
-/* SCROLL BASE */
-.scroll{
+max-width:500px;
+padding:25px;
+text-align:center;
 position:relative;
+z-index:2;
+}
+
+/* ===== MENSAJE INICIAL ===== */
+.intro{
+font-size:17px;
+line-height:1.8;
+color:#ffe4f2;
+animation:fadeIn 1.5s ease;
+}
+
+.key-box{
+margin-top:30px;
+}
+
+.key-box input{
 width:100%;
-max-width:620px;
-height:60px;
-display:flex;
-align-items:center;
-justify-content:center;
+padding:14px;
+border-radius:30px;
+border:none;
+text-align:center;
+font-size:16px;
+outline:none;
 }
 
-/* ROLLOS */
-.roll{
-position:absolute;
+.key-box button{
+margin-top:15px;
 width:100%;
-height:50%;
-background:linear-gradient(#e6cfa0,#d4bb88);
-box-shadow:inset 0 8px 20px rgba(0,0,0,.35);
-z-index:3;
-transition:transform 2.5s cubic-bezier(.77,0,.18,1);
-}
-
-.roll.top{
-top:0;
-transform-origin:bottom;
-border-top-left-radius:8px;
-border-top-right-radius:8px;
-}
-
-.roll.bottom{
-bottom:0;
-transform-origin:top;
-border-bottom-left-radius:8px;
-border-bottom-right-radius:8px;
-}
-
-/* ABRIR ROLLOS */
-.scroll.open .roll.top{
-transform:scaleY(0);
-}
-.scroll.open .roll.bottom{
-transform:scaleY(0);
-}
-
-/* PAPEL CENTRAL */
-.paper{
-position:absolute;
-width:100%;
-max-width:620px;
-height:0;
-background:linear-gradient(#fdf2d9,#f3dfb2);
-overflow:hidden;
-border-radius:8px;
-box-shadow:
-0 30px 60px rgba(0,0,0,.7),
-inset 0 0 80px rgba(0,0,0,.15);
-transition:height 2.5s cubic-bezier(.77,0,.18,1);
-z-index:1;
-}
-
-.scroll.open .paper{
-height:75vh;
-max-height:750px;
-}
-
-/* SELLO */
-.seal{
-position:absolute;
-width:100px;
-height:100px;
-background:radial-gradient(circle,#b30000 0%,#6a0000 75%);
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
+padding:14px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff4fa3,#ff007f);
 color:white;
 font-weight:bold;
-font-size:24px;
+cursor:pointer;
+transition:.3s;
+}
+
+.key-box button:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px rgba(255,0,127,.5);
+}
+
+.error{
+margin-top:12px;
+color:#ff9fcf;
+font-size:14px;
+}
+
+/* ===== ESCENA PERGAMINO ===== */
+.scroll-scene{
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+animation:fadeIn 1.5s ease;
+}
+
+/* ===== PERGAMINO REALISTA ===== */
+.scroll{
+position:relative;
+width:95%;
+max-width:420px;
+height:130px;
+background:
+linear-gradient(to bottom,#fdf1d6,#e6c79c),
+url('https://www.transparenttextures.com/patterns/old-wall.png');
+border-radius:80px;
 box-shadow:
-0 15px 30px rgba(0,0,0,.8),
-inset 0 0 20px rgba(255,255,255,.3);
-z-index:4;
+inset 0 0 40px rgba(0,0,0,.3),
+0 15px 35px rgba(0,0,0,.5);
+transition:all 1.6s cubic-bezier(.77,0,.18,1);
+overflow:hidden;
+}
+
+.scroll::before,
+.scroll::after{
+content:"";
+position:absolute;
+width:60px;
+height:100%;
+background:radial-gradient(circle,#d6b07a,#a8743b);
+top:0;
+}
+
+.scroll::before{
+left:-25px;
+border-radius:50%;
+}
+
+.scroll::after{
+right:-25px;
+border-radius:50%;
+}
+
+.scroll.open{
+height:75vh;
+border-radius:25px;
+}
+
+/* ===== SELLO ===== */
+.seal{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:95px;
+height:95px;
+border-radius:50%;
+background:radial-gradient(circle,#c2185b,#6a0030);
+display:flex;
+align-items:center;
+justify-content:center;
+color:#ffe4ec;
+font-weight:bold;
+font-size:26px;
+cursor:pointer;
 transition:all 1s ease;
+box-shadow:0 0 20px rgba(0,0,0,.5);
+}
+
+.seal:hover{
+transform:translate(-50%,-50%) scale(1.08);
 }
 
 .seal.break{
-transform:scale(0);
+transform:translate(-50%,250px) rotate(40deg);
 opacity:0;
 }
 
-/* CONTENIDO */
+/* ===== TEXTO CERRADO ===== */
+.closed-text{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:15px;
+color:#5a1e36;
+text-align:center;
+width:80%;
+}
+
+/* ===== CONTENIDO ===== */
 .content{
 opacity:0;
-padding:80px 60px;
-overflow-y:auto;
+padding:35px 25px;
 height:100%;
-color:#4b2e1f;
-transition:opacity 1.5s ease 1.5s;
+overflow-y:auto;
+color:#5a1e36;
+white-space:pre-line;
+transition:opacity 1.5s ease;
 }
 
 .content.show{
 opacity:1;
 }
 
-.opening{
-font-style:italic;
-margin-bottom:25px;
-text-align:center;
-color:#6b3e26;
-}
-
 .title{
-font-family:'Great Vibes', cursive;
-font-size:42px;
-margin-bottom:25px;
-color:#7a1f1f;
+font-family:'Great Vibes',cursive;
+font-size:2.4rem;
 text-align:center;
+margin-bottom:20px;
+color:#c2185b;
 }
 
-p{line-height:1.6;}
-
-/* INPUT */
-.secret{
-margin-top:25px;
-text-align:center;
-}
-
-.secret input{
-padding:14px 30px;
-border-radius:30px;
-border:none;
-font-size:16px;
-text-align:center;
-width:280px;
-}
-
-/* PREGUNTA */
+/* ===== PREGUNTA FINAL ===== */
 .question{
 margin-top:30px;
 text-align:center;
-display:none;
 }
 
-button{
-padding:12px 25px;
-margin:10px;
+.question h2{
+margin-bottom:15px;
+color:#a1124c;
+}
+
+.question button{
+margin:8px;
+padding:12px 20px;
 border:none;
 border-radius:25px;
 cursor:pointer;
-font-size:15px;
+font-weight:bold;
+transition:.3s;
 }
 
-.yes{background:#7a1f1f;color:white;}
-.no{background:#ccc;position:relative;}
-
-/* LLUVIA */
-.particle{
-position:fixed;
-top:-20px;
-font-size:18px;
-animation:fall linear infinite;
+.yes{
+background:#ff007f;
+color:white;
 }
+
+.no{
+background:#444;
+color:white;
+}
+
+.yes:hover{
+transform:scale(1.1);
+box-shadow:0 0 15px rgba(255,0,127,.6);
+}
+
+.no:hover{
+transform:translateX(10px);
+}
+
+/* ===== LLUVIA ===== */
+.heart,.rose{
+position:absolute;
+top:-40px;
+animation:fall linear forwards;
+pointer-events:none;
+}
+
 @keyframes fall{
-to{transform:translateY(110vh);}
+to{transform:translateY(110vh);opacity:0;}
 }
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
+}
+
 </style>
 </head>
 <body>
 
-<div class="intro" id="intro">
-Karen Andreina... He custodiado este secreto a través de los kilómetros, esperando el momento exacto en que las estrellas se alinearan. Lo que estás por ver no es solo un mensaje; es un pedazo de mi alma que ha viajado por el aire hasta llegar a ti.
-<br><br>
-Pero el destino tiene sus reglas: este pergamino está protegido por un sello que solo tú puedes romper. Para revelar lo que el universo escribió para nosotros, debes susurrar la palabra que nos pertenece... nuestra llave.
-<br><br>
-Escribe la frase secreta para romper el sello y entrar a mi corazón.
-</div>
-
 <div class="wrapper">
 
+<!-- MENSAJE INICIAL -->
+<div class="intro" id="intro">
+Karen Andreina... He custodiado este secreto a través de los kilómetros, esperando el momento exacto en que las estrellas se alinearan. Lo que estás por ver no es solo un mensaje; es un pedazo de mi alma que ha viajado por el aire hasta llegar a ti.
+Pero el destino tiene sus reglas: este pergamino está protegido por un sello que solo tú puedes romper. Para revelar lo que el universo escribió para nosotros, debes susurrar la palabra que nos pertenece... nuestra llave.
+Escribe la frase secreta para romper el sello y entrar a mi corazón.
+
+<div class="key-box">
+<input type="text" id="keyInput" placeholder="Escribe la frase secreta">
+<button onclick="checkKey()">Romper el sello</button>
+<div class="error" id="errorMsg"></div>
+</div>
+</div>
+
+<!-- PERGAMINO -->
+<div class="scroll-scene" id="scrollScene">
 <div class="scroll" id="scroll">
 
-<div class="roll top"></div>
-<div class="roll bottom"></div>
-
-<div class="paper">
-<div class="content" id="content">
-
-<div class="opening">
-“El destino responde a quien sabe el lenguaje del alma…”
+<div class="closed-text" id="closedText">
+Pergamino protegido por un juramento eterno...
 </div>
+
+<div class="content" id="content">
 
 <div class="title">Karen Andreina, mi amor</div>
 
-<p>
-Karen Andreina, mi amor,<br><br>
+Karen Andreina, mi amor,
 En el vasto desierto de la existencia, hay encuentros que no son producto del azar, sino del destino. Tú eres ese oasis que mi alma reconoció mucho antes de que mis ojos te vieran. Dicen que cuando deseas algo con toda la fuerza de tu corazón, el universo entero conspira para que lo alcances; hoy entiendo que mi único deseo siempre fue habitar en la paz de tu mirada.
-<br><br>
 La distancia es solo una cifra vacía, una prueba para los valientes que saben que el amor verdadero no se mide en kilómetros, sino en latidos que resuenan en la misma frecuencia. Aunque hoy nos separe el espacio, mi pensamiento habita en tu sonrisa y mi espíritu se refugia en el susurro de tus caricias.
-<br><br>
 Eres mi leyenda personal, el tesoro que el viento me nombra cada noche y la luz que guía mi camino de regreso a casa. Que este 14 de febrero sea el último que el calendario nos robe estando lejos, porque en el lenguaje del alma, ya estamos abrazados para siempre.
-<br><br>
 Feliz día de San Valentín, mi pollita.
-<br><br>
-Con todo el amor que desborda mi ser,<br>
+Con todo el amor que desborda mi ser,
 Erick Alexander.
-</p>
 
-<div class="question" id="question">
-<h3>¿Quieres ser mi Harley Queen y cómplice de por vida?</h3>
-<button class="yes" onclick="alert('Sabía que dirías que sí 🤍🔥')">Sí, acepto</button>
-<button class="no" id="noBtn">No 😅</button>
+<div class="question">
+<h2>¿Quieres ser mi cómplice de por vida?</h2>
+<button class="yes" onclick="celebrate()">Sí 🤍</button>
+<button class="no" onclick="moveButton(this)">No tienes otra opción 😏</button>
 </div>
 
-</div>
 </div>
 
 <div class="seal" id="seal">E&K</div>
-
 </div>
-
-<div class="secret">
-<input type="password" id="key" placeholder="Introduce la frase secreta">
 </div>
-
 </div>
 
 <script>
-document.getElementById("key").addEventListener("keyup",function(){
-if(this.value==="MiPollita"){
-openScroll();
-}
-});
 
-function openScroll(){
-document.getElementById("seal").classList.add("break");
-document.getElementById("intro").style.opacity="0";
-
-setTimeout(()=>{
+function checkKey(){
+const input=document.getElementById("keyInput").value.trim();
+if(input==="MiPollita"){
 document.getElementById("intro").style.display="none";
+document.getElementById("scrollScene").style.display="flex";
+}else{
+document.getElementById("errorMsg").textContent="Esa no es nuestra palabra… 🤍";
+}
+}
+
+document.getElementById("seal").addEventListener("click",function(){
+this.classList.add("break");
+setTimeout(()=>{
 document.getElementById("scroll").classList.add("open");
+document.getElementById("closedText").style.display="none";
 document.getElementById("content").classList.add("show");
-document.getElementById("question").style.display="block";
-roseRain();
-},1000);
-}
-
-function roseRain(){
-setInterval(()=>{
-let p=document.createElement("div");
-p.className="particle";
-p.innerHTML=Math.random()>0.5?"🌹":"❤️";
-p.style.left=Math.random()*100+"vw";
-p.style.animationDuration=(5+Math.random()*4)+"s";
-document.body.appendChild(p);
-setTimeout(()=>p.remove(),9000);
-},500);
-}
-
-document.getElementById("noBtn").addEventListener("mouseover",function(){
-this.style.transform="translate("+ (Math.random()*120-60)+"px,"+(Math.random()*80-40)+"px)";
+startRain();
+},900);
 });
+
+function startRain(){
+setInterval(()=>{
+let el=document.createElement("div");
+el.className=Math.random()>0.5?"heart":"rose";
+el.innerHTML=Math.random()>0.5?"❤":"🌹";
+el.style.left=Math.random()*100+"vw";
+el.style.animationDuration=(3+Math.random()*4)+"s";
+el.style.fontSize=(16+Math.random()*12)+"px";
+document.body.appendChild(el);
+setTimeout(()=>el.remove(),7000);
+},300);
+}
+
+function celebrate(){
+alert("Ahora oficialmente somos eternos 🤍✨");
+}
+
+function moveButton(btn){
+btn.style.position="absolute";
+btn.style.left=Math.random()*70+"%";
+btn.style.top=Math.random()*70+"%";
+}
+
 </script>
 
 </body>
-      </html>
-  
+</html>
