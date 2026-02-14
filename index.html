@@ -19,24 +19,52 @@ justify-content:center;
 overflow:hidden;
 color:white;
 font-family:'Playfair Display',serif;
+transition:background 2s ease;
 }
 
-/* ===== CONTENEDOR ===== */
+/* Fondo partículas */
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at 20% 30%,rgba(255,255,255,0.05),transparent 40%),
+radial-gradient(circle at 80% 70%,rgba(255,255,255,0.05),transparent 40%);
+animation:floatBg 8s infinite alternate ease-in-out;
+pointer-events:none;
+}
+
+@keyframes floatBg{
+from{transform:translateY(-10px);}
+to{transform:translateY(10px);}
+}
+
+/* CONTENEDOR */
 .wrapper{
 width:100%;
-max-width:500px;
-padding:25px;
+max-width:520px;
+padding:20px;
 text-align:center;
 position:relative;
 z-index:2;
 }
 
-/* ===== MENSAJE INICIAL ===== */
+/* MENSAJE INICIAL */
 .intro{
 font-size:17px;
 line-height:1.8;
 color:#ffe4f2;
 animation:fadeIn 1.5s ease;
+}
+
+.shake{
+animation:shake .4s;
+}
+
+@keyframes shake{
+0%,100%{transform:translateX(0);}
+25%{transform:translateX(-5px);}
+75%{transform:translateX(5px);}
 }
 
 .key-box{
@@ -66,18 +94,13 @@ cursor:pointer;
 transition:.3s;
 }
 
-.key-box button:hover{
-transform:scale(1.05);
-box-shadow:0 0 15px rgba(255,0,127,.5);
-}
-
 .error{
 margin-top:12px;
 color:#ff9fcf;
 font-size:14px;
 }
 
-/* ===== ESCENA PERGAMINO ===== */
+/* ESCENA */
 .scroll-scene{
 display:none;
 justify-content:center;
@@ -86,49 +109,43 @@ flex-direction:column;
 animation:fadeIn 1.5s ease;
 }
 
-/* ===== PERGAMINO REALISTA ===== */
+/* PERGAMINO */
 .scroll{
 position:relative;
-width:95%;
+width:100%;
 max-width:420px;
 height:130px;
-background:
-linear-gradient(to bottom,#fdf1d6,#e6c79c),
-url('https://www.transparenttextures.com/patterns/old-wall.png');
+background:linear-gradient(to bottom,#fdf1d6,#e6c79c);
 border-radius:80px;
-box-shadow:
-inset 0 0 40px rgba(0,0,0,.3),
-0 15px 35px rgba(0,0,0,.5);
-transition:all 1.6s cubic-bezier(.77,0,.18,1);
+box-shadow:inset 0 0 40px rgba(0,0,0,.3),0 15px 35px rgba(0,0,0,.5);
+transition:all 1.8s cubic-bezier(.77,0,.18,1);
 overflow:hidden;
 }
 
-.scroll::before,
-.scroll::after{
-content:"";
-position:absolute;
-width:60px;
-height:100%;
-background:radial-gradient(circle,#d6b07a,#a8743b);
-top:0;
-}
-
-.scroll::before{
-left:-25px;
-border-radius:50%;
-}
-
-.scroll::after{
-right:-25px;
-border-radius:50%;
-}
-
 .scroll.open{
-height:75vh;
+height:80vh;
 border-radius:25px;
 }
 
-/* ===== SELLO ===== */
+/* brillo dinámico */
+.scroll::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:50%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
+animation:shine 5s infinite;
+}
+
+@keyframes shine{
+0%{left:-100%;}
+50%{left:120%;}
+100%{left:120%;}
+}
+
+/* SELLO */
 .seal{
 position:absolute;
 top:50%;
@@ -146,34 +163,31 @@ font-weight:bold;
 font-size:26px;
 cursor:pointer;
 transition:all 1s ease;
-box-shadow:0 0 20px rgba(0,0,0,.5);
-}
-
-.seal:hover{
-transform:translate(-50%,-50%) scale(1.08);
+z-index:3;
 }
 
 .seal.break{
-transform:translate(-50%,250px) rotate(40deg);
+transform:translate(-50%,250px) rotate(40deg) scale(.7);
 opacity:0;
 }
 
-/* ===== TEXTO CERRADO ===== */
+/* TEXTO CERRADO CORREGIDO */
 .closed-text{
 position:absolute;
-top:50%;
+top:20%;
 left:50%;
-transform:translate(-50%,-50%);
+transform:translateX(-50%);
 font-size:15px;
 color:#5a1e36;
 text-align:center;
-width:80%;
+width:90%;
+z-index:1;
 }
 
-/* ===== CONTENIDO ===== */
+/* CONTENIDO */
 .content{
 opacity:0;
-padding:35px 25px;
+padding:30px 20px;
 height:100%;
 overflow-y:auto;
 color:#5a1e36;
@@ -181,22 +195,40 @@ white-space:pre-line;
 transition:opacity 1.5s ease;
 }
 
-.content.show{
-opacity:1;
-}
+.content.show{opacity:1;}
 
 .title{
 font-family:'Great Vibes',cursive;
 font-size:2.4rem;
-text-align:center;
-margin-bottom:20px;
+margin-bottom:15px;
 color:#c2185b;
 }
 
-/* ===== PREGUNTA FINAL ===== */
+/* FOTO CORAZÓN */
+.heart-frame{
+width:150px;
+height:135px;
+margin:10px auto 20px auto;
+position:relative;
+animation:heartbeat 2s infinite;
+}
+
+.heart-frame img{
+width:100%;
+height:100%;
+object-fit:cover;
+clip-path:path("M75 130 L10 65 A35 35 0 1 1 75 35 A35 35 0 1 1 140 65 Z");
+border:4px solid #c2185b;
+}
+
+@keyframes heartbeat{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
+
+/* PREGUNTA */
 .question{
 margin-top:30px;
-text-align:center;
 }
 
 .question h2{
@@ -224,17 +256,8 @@ background:#444;
 color:white;
 }
 
-.yes:hover{
-transform:scale(1.1);
-box-shadow:0 0 15px rgba(255,0,127,.6);
-}
-
-.no:hover{
-transform:translateX(10px);
-}
-
-/* ===== LLUVIA ===== */
-.heart,.rose{
+/* LLUVIA */
+.heart,.rose,.spark{
 position:absolute;
 top:-40px;
 animation:fall linear forwards;
@@ -256,7 +279,6 @@ to{opacity:1;transform:translateY(0);}
 
 <div class="wrapper">
 
-<!-- MENSAJE INICIAL -->
 <div class="intro" id="intro">
 Karen Andreina... He custodiado este secreto a través de los kilómetros, esperando el momento exacto en que las estrellas se alinearan. Lo que estás por ver no es solo un mensaje; es un pedazo de mi alma que ha viajado por el aire hasta llegar a ti.
 Pero el destino tiene sus reglas: este pergamino está protegido por un sello que solo tú puedes romper. Para revelar lo que el universo escribió para nosotros, debes susurrar la palabra que nos pertenece... nuestra llave.
@@ -269,7 +291,6 @@ Escribe la frase secreta para romper el sello y entrar a mi corazón.
 </div>
 </div>
 
-<!-- PERGAMINO -->
 <div class="scroll-scene" id="scrollScene">
 <div class="scroll" id="scroll">
 
@@ -278,6 +299,10 @@ Pergamino protegido por un juramento eterno...
 </div>
 
 <div class="content" id="content">
+
+<div class="heart-frame">
+<img src="mipollita.jpg">
+</div>
 
 <div class="title">Karen Andreina, mi amor</div>
 
@@ -311,17 +336,21 @@ document.getElementById("intro").style.display="none";
 document.getElementById("scrollScene").style.display="flex";
 }else{
 document.getElementById("errorMsg").textContent="Esa no es nuestra palabra… 🤍";
+document.getElementById("keyInput").classList.add("shake");
+setTimeout(()=>document.getElementById("keyInput").classList.remove("shake"),400);
 }
 }
 
 document.getElementById("seal").addEventListener("click",function(){
 this.classList.add("break");
+playSealSound();
 setTimeout(()=>{
 document.getElementById("scroll").classList.add("open");
 document.getElementById("closedText").style.display="none";
 document.getElementById("content").classList.add("show");
 startRain();
-},900);
+startSparkles();
+},1000);
 });
 
 function startRain(){
@@ -337,6 +366,18 @@ setTimeout(()=>el.remove(),7000);
 },300);
 }
 
+function startSparkles(){
+setInterval(()=>{
+let el=document.createElement("div");
+el.className="spark";
+el.innerHTML="✨";
+el.style.left=Math.random()*100+"vw";
+el.style.animationDuration="4s";
+document.body.appendChild(el);
+setTimeout(()=>el.remove(),5000);
+},800);
+}
+
 function celebrate(){
 alert("Ahora oficialmente somos eternos 🤍✨");
 }
@@ -347,7 +388,14 @@ btn.style.left=Math.random()*70+"%";
 btn.style.top=Math.random()*70+"%";
 }
 
+function playSealSound(){
+const audio=new Audio("https://assets.mixkit.co/sfx/preview/mixkit-magic-sweep-game-trophy-257.mp3");
+audio.volume=0.4;
+audio.play();
+}
+
 </script>
 
 </body>
-</html>
+  </html>
+  
