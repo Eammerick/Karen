@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K + E 🖤</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-family:Georgia, serif;
+background:linear-gradient(to top,#000 60%,#1a0000);
+color:white;
+text-align:center;
+}
+
+/* Fondo */
+.moon{
+position:absolute;
+top:40px;
+right:40px;
+width:120px;
+height:120px;
+border-radius:50%;
+background:radial-gradient(circle,#fff,#ccc,#999);
+box-shadow:0 0 40px #fff;
+}
+
+#countdown{
+font-size:70px;
+text-shadow:0 0 25px #ff3366;
+}
+
+.scroll{
+display:none;
+width:90%;
+max-width:600px;
+height:75vh;
+padding:30px;
+border-radius:15px;
+background:linear-gradient(to bottom,#f5deb3,#e6c9a8);
+color:#4b2e2e;
+overflow:auto;
+animation:fadeIn 2s forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+.ring{
+font-size:60px;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+.question{
+margin-top:20px;
+font-size:22px;
+}
+
+.buttons{
+margin-top:20px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:25px;
+font-size:14px;
+cursor:pointer;
+}
+
+.yes{background:#ff3366;color:white;}
+.no{background:#222;color:white;position:relative;}
+
+.kiss{
+position:absolute;
+font-size:100px;
+animation:pop 1.5s forwards;
+}
+
+@keyframes pop{
+0%{opacity:0;transform:scale(0);}
+100%{opacity:1;transform:scale(1);}
+}
+
+.firework{
+position:absolute;
+width:6px;
+height:6px;
+background:gold;
+border-radius:50%;
+animation:explode 1s forwards;
+}
+
+@keyframes explode{
+to{transform:scale(12);opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<div class="moon"></div>
+<div id="countdown">3</div>
+
+<div id="scroll" class="scroll">
+<h2>Karen 🖤</h2>
+
+<p>
+En un mundo lleno de caos,
+elegí ser tu cómplice.
+Tu compañero.
+Tu aliado.
+Tu amor eterno.
+</p>
+
+<div class="ring">💍</div>
+
+<div class="question">
+¿Quieres ser mi Harley Queen y cómplice de por vida?
+</div>
+
+<div class="buttons">
+<button class="yes" onclick="acceptLove()">Sí, acepto 🖤🔥</button>
+<button class="no" id="noBtn">No 😅</button>
+</div>
+</div>
+
+<audio id="music" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3">
+</audio>
+
+<script>
+const countdown=document.getElementById("countdown");
+const scroll=document.getElementById("scroll");
+const music=document.getElementById("music");
+const noBtn=document.getElementById("noBtn");
+
+let count=3;
+let timer=setInterval(()=>{
+count--;
+if(count>0){
+countdown.innerText=count;
+}else{
+clearInterval(timer);
+countdown.style.display="none";
+scroll.style.display="block";
+music.play();
+}
+},1000);
+
+/* botón huye */
+noBtn.addEventListener("mouseover",()=>{
+noBtn.style.position="absolute";
+noBtn.style.left=Math.random()*80+"vw";
+noBtn.style.top=Math.random()*80+"vh";
+});
+
+/* fuegos */
+function fireworks(){
+for(let i=0;i<20;i++){
+let f=document.createElement("div");
+f.className="firework";
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*60+"vh";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1000);
+}
+}
+
+/* aceptar */
+function acceptLove(){
+fireworks();
+
+let kiss=document.createElement("div");
+kiss.className="kiss";
+kiss.innerHTML="💋";
+document.body.appendChild(kiss);
+
+setTimeout(generatePDF,1500);
+}
+
+/* generar PDF elegante */
+function generatePDF(){
+const content = `
+CERTIFICADO OFICIAL
+
+Karen & Erick
+
+Declarados oficialmente:
+Harley Queen y Cómplices de por Vida 🖤🔥
+
+Fecha: ${new Date().toLocaleDateString()}
+`;
+
+const blob = new Blob([content], {type:"application/pdf"});
+const link = document.createElement("a");
+link.href = URL.createObjectURL(blob);
+link.download = "Certificado_Complíces.pdf";
+link.click();
+}
+</script>
+
+</body>
+</html>
