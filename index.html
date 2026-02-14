@@ -3,220 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K + E 🖤</title>
+<title>Para Karen 🤍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-margin:0;
-overflow:hidden;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-font-family:Georgia, serif;
-background:linear-gradient(to top,#000 60%,#1a0000);
+background:radial-gradient(circle at center,#1b1b1b 0%,#000 85%);
+font-family:'Cormorant Garamond', serif;
 color:white;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+padding:20px;
+}
+
+/* INTRO */
+.intro{
+max-width:650px;
+text-align:center;
+line-height:1.6;
+font-size:18px;
+margin-bottom:35px;
+transition:opacity 1s ease;
+}
+
+/* WRAPPER */
+.wrapper{
+display:flex;
+flex-direction:column;
+align-items:center;
+width:100%;
+max-width:750px;
+}
+
+/* SCROLL BASE */
+.scroll{
+position:relative;
+width:100%;
+max-width:620px;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* ROLLOS */
+.roll{
+position:absolute;
+width:100%;
+height:50%;
+background:linear-gradient(#e6cfa0,#d4bb88);
+box-shadow:inset 0 8px 20px rgba(0,0,0,.35);
+z-index:3;
+transition:transform 2.5s cubic-bezier(.77,0,.18,1);
+}
+
+.roll.top{
+top:0;
+transform-origin:bottom;
+border-top-left-radius:8px;
+border-top-right-radius:8px;
+}
+
+.roll.bottom{
+bottom:0;
+transform-origin:top;
+border-bottom-left-radius:8px;
+border-bottom-right-radius:8px;
+}
+
+/* ABRIR ROLLOS */
+.scroll.open .roll.top{
+transform:scaleY(0);
+}
+.scroll.open .roll.bottom{
+transform:scaleY(0);
+}
+
+/* PAPEL CENTRAL */
+.paper{
+position:absolute;
+width:100%;
+max-width:620px;
+height:0;
+background:linear-gradient(#fdf2d9,#f3dfb2);
+overflow:hidden;
+border-radius:8px;
+box-shadow:
+0 30px 60px rgba(0,0,0,.7),
+inset 0 0 80px rgba(0,0,0,.15);
+transition:height 2.5s cubic-bezier(.77,0,.18,1);
+z-index:1;
+}
+
+.scroll.open .paper{
+height:75vh;
+max-height:750px;
+}
+
+/* SELLO */
+.seal{
+position:absolute;
+width:100px;
+height:100px;
+background:radial-gradient(circle,#b30000 0%,#6a0000 75%);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-weight:bold;
+font-size:24px;
+box-shadow:
+0 15px 30px rgba(0,0,0,.8),
+inset 0 0 20px rgba(255,255,255,.3);
+z-index:4;
+transition:all 1s ease;
+}
+
+.seal.break{
+transform:scale(0);
+opacity:0;
+}
+
+/* CONTENIDO */
+.content{
+opacity:0;
+padding:80px 60px;
+overflow-y:auto;
+height:100%;
+color:#4b2e1f;
+transition:opacity 1.5s ease 1.5s;
+}
+
+.content.show{
+opacity:1;
+}
+
+.opening{
+font-style:italic;
+margin-bottom:25px;
+text-align:center;
+color:#6b3e26;
+}
+
+.title{
+font-family:'Great Vibes', cursive;
+font-size:42px;
+margin-bottom:25px;
+color:#7a1f1f;
 text-align:center;
 }
 
-/* Fondo */
-.moon{
-position:absolute;
-top:40px;
-right:40px;
-width:120px;
-height:120px;
-border-radius:50%;
-background:radial-gradient(circle,#fff,#ccc,#999);
-box-shadow:0 0 40px #fff;
+p{line-height:1.6;}
+
+/* INPUT */
+.secret{
+margin-top:25px;
+text-align:center;
 }
 
-#countdown{
-font-size:70px;
-text-shadow:0 0 25px #ff3366;
+.secret input{
+padding:14px 30px;
+border-radius:30px;
+border:none;
+font-size:16px;
+text-align:center;
+width:280px;
 }
 
-.scroll{
-display:none;
-width:90%;
-max-width:600px;
-height:75vh;
-padding:30px;
-border-radius:15px;
-background:linear-gradient(to bottom,#f5deb3,#e6c9a8);
-color:#4b2e2e;
-overflow:auto;
-animation:fadeIn 2s forwards;
-}
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-.ring{
-font-size:60px;
-animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.1);}
-100%{transform:scale(1);}
-}
-
+/* PREGUNTA */
 .question{
-margin-top:20px;
-font-size:22px;
-}
-
-.buttons{
-margin-top:20px;
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
+margin-top:30px;
+text-align:center;
+display:none;
 }
 
 button{
-padding:10px 20px;
+padding:12px 25px;
+margin:10px;
 border:none;
 border-radius:25px;
-font-size:14px;
 cursor:pointer;
+font-size:15px;
 }
 
-.yes{background:#ff3366;color:white;}
-.no{background:#222;color:white;position:relative;}
+.yes{background:#7a1f1f;color:white;}
+.no{background:#ccc;position:relative;}
 
-.kiss{
-position:absolute;
-font-size:100px;
-animation:pop 1.5s forwards;
+/* LLUVIA */
+.particle{
+position:fixed;
+top:-20px;
+font-size:18px;
+animation:fall linear infinite;
 }
-
-@keyframes pop{
-0%{opacity:0;transform:scale(0);}
-100%{opacity:1;transform:scale(1);}
-}
-
-.firework{
-position:absolute;
-width:6px;
-height:6px;
-background:gold;
-border-radius:50%;
-animation:explode 1s forwards;
-}
-
-@keyframes explode{
-to{transform:scale(12);opacity:0;}
+@keyframes fall{
+to{transform:translateY(110vh);}
 }
 </style>
 </head>
 <body>
 
-<div class="moon"></div>
-<div id="countdown">3</div>
+<div class="intro" id="intro">
+Karen Andreina... He custodiado este secreto a través de los kilómetros, esperando el momento exacto en que las estrellas se alinearan. Lo que estás por ver no es solo un mensaje; es un pedazo de mi alma que ha viajado por el aire hasta llegar a ti.
+<br><br>
+Pero el destino tiene sus reglas: este pergamino está protegido por un sello que solo tú puedes romper. Para revelar lo que el universo escribió para nosotros, debes susurrar la palabra que nos pertenece... nuestra llave.
+<br><br>
+Escribe la frase secreta para romper el sello y entrar a mi corazón.
+</div>
 
-<div id="scroll" class="scroll">
-<h2>Karen 🖤</h2>
+<div class="wrapper">
+
+<div class="scroll" id="scroll">
+
+<div class="roll top"></div>
+<div class="roll bottom"></div>
+
+<div class="paper">
+<div class="content" id="content">
+
+<div class="opening">
+“El destino responde a quien sabe el lenguaje del alma…”
+</div>
+
+<div class="title">Karen Andreina, mi amor</div>
 
 <p>
-En un mundo lleno de caos,
-elegí ser tu cómplice.
-Tu compañero.
-Tu aliado.
-Tu amor eterno.
+Karen Andreina, mi amor,<br><br>
+En el vasto desierto de la existencia, hay encuentros que no son producto del azar, sino del destino. Tú eres ese oasis que mi alma reconoció mucho antes de que mis ojos te vieran. Dicen que cuando deseas algo con toda la fuerza de tu corazón, el universo entero conspira para que lo alcances; hoy entiendo que mi único deseo siempre fue habitar en la paz de tu mirada.
+<br><br>
+La distancia es solo una cifra vacía, una prueba para los valientes que saben que el amor verdadero no se mide en kilómetros, sino en latidos que resuenan en la misma frecuencia. Aunque hoy nos separe el espacio, mi pensamiento habita en tu sonrisa y mi espíritu se refugia en el susurro de tus caricias.
+<br><br>
+Eres mi leyenda personal, el tesoro que el viento me nombra cada noche y la luz que guía mi camino de regreso a casa. Que este 14 de febrero sea el último que el calendario nos robe estando lejos, porque en el lenguaje del alma, ya estamos abrazados para siempre.
+<br><br>
+Feliz día de San Valentín, mi pollita.
+<br><br>
+Con todo el amor que desborda mi ser,<br>
+Erick Alexander.
 </p>
 
-<div class="ring">💍</div>
-
-<div class="question">
-¿Quieres ser mi Harley Queen y cómplice de por vida?
-</div>
-
-<div class="buttons">
-<button class="yes" onclick="acceptLove()">Sí, acepto 🖤🔥</button>
+<div class="question" id="question">
+<h3>¿Quieres ser mi Harley Queen y cómplice de por vida?</h3>
+<button class="yes" onclick="alert('Sabía que dirías que sí 🤍🔥')">Sí, acepto</button>
 <button class="no" id="noBtn">No 😅</button>
 </div>
+
+</div>
 </div>
 
-<audio id="music" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3">
-</audio>
+<div class="seal" id="seal">E&K</div>
+
+</div>
+
+<div class="secret">
+<input type="password" id="key" placeholder="Introduce la frase secreta">
+</div>
+
+</div>
 
 <script>
-const countdown=document.getElementById("countdown");
-const scroll=document.getElementById("scroll");
-const music=document.getElementById("music");
-const noBtn=document.getElementById("noBtn");
-
-let count=3;
-let timer=setInterval(()=>{
-count--;
-if(count>0){
-countdown.innerText=count;
-}else{
-clearInterval(timer);
-countdown.style.display="none";
-scroll.style.display="block";
-music.play();
+document.getElementById("key").addEventListener("keyup",function(){
+if(this.value==="MiPollita"){
+openScroll();
 }
-},1000);
-
-/* botón huye */
-noBtn.addEventListener("mouseover",()=>{
-noBtn.style.position="absolute";
-noBtn.style.left=Math.random()*80+"vw";
-noBtn.style.top=Math.random()*80+"vh";
 });
 
-/* fuegos */
-function fireworks(){
-for(let i=0;i<20;i++){
-let f=document.createElement("div");
-f.className="firework";
-f.style.left=Math.random()*100+"vw";
-f.style.top=Math.random()*60+"vh";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),1000);
-}
-}
+function openScroll(){
+document.getElementById("seal").classList.add("break");
+document.getElementById("intro").style.opacity="0";
 
-/* aceptar */
-function acceptLove(){
-fireworks();
-
-let kiss=document.createElement("div");
-kiss.className="kiss";
-kiss.innerHTML="💋";
-document.body.appendChild(kiss);
-
-setTimeout(generatePDF,1500);
+setTimeout(()=>{
+document.getElementById("intro").style.display="none";
+document.getElementById("scroll").classList.add("open");
+document.getElementById("content").classList.add("show");
+document.getElementById("question").style.display="block";
+roseRain();
+},1000);
 }
 
-/* generar PDF elegante */
-function generatePDF(){
-const content = `
-CERTIFICADO OFICIAL
-
-Karen & Erick
-
-Declarados oficialmente:
-Harley Queen y Cómplices de por Vida 🖤🔥
-
-Fecha: ${new Date().toLocaleDateString()}
-`;
-
-const blob = new Blob([content], {type:"application/pdf"});
-const link = document.createElement("a");
-link.href = URL.createObjectURL(blob);
-link.download = "Certificado_Complíces.pdf";
-link.click();
+function roseRain(){
+setInterval(()=>{
+let p=document.createElement("div");
+p.className="particle";
+p.innerHTML=Math.random()>0.5?"🌹":"❤️";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(5+Math.random()*4)+"s";
+document.body.appendChild(p);
+setTimeout(()=>p.remove(),9000);
+},500);
 }
+
+document.getElementById("noBtn").addEventListener("mouseover",function(){
+this.style.transform="translate("+ (Math.random()*120-60)+"px,"+(Math.random()*80-40)+"px)";
+});
 </script>
 
 </body>
-</html>
+      </html>
+  
